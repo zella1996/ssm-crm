@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zella.crm.mapper.CustomerMapper">
+
+    <!-- 根据QueryVo查询分页数据 -->
+    <select id="queryCustomerByQueryVo" parameterType="QueryVo" resultType="Customer">
+        SELECT *
+        FROM customer
+        <where>
+            <if test="custName != null and custName !=''">
+                cust_name LIKE "%"#{custName}"%"
+            </if>
+            <if test="custSource != null and custSource !=''">
+                AND cust_Source = #{custSource}
+            </if>
+            <if test="custIndustry != null and custIndustry !=''">
+                AND cust_Industry = #{custIndustry}
+            </if>
+            <if test="custLevel != null and custLevel !=''">
+                AND cust_Level = #{custLevel}
+            </if>
+        </where>
+        LIMIT #{startRow}, #{size}
+    </select>
+
+    <select id="queryCustomerCountByQueryVo" parameterType="QueryVo" resultType="Integer">
+        SELECT count(cust_id)
+        FROM customer
+        <where>
+            <if test="custName != null and custName !=''">
+                cust_name LIKE "%"#{custName}"%"
+            </if>
+            <if test="custSource != null and custSource !=''">
+                AND cust_Source = #{custSource}
+            </if>
+            <if test="custIndustry != null and custIndustry !=''">
+                AND cust_Industry = #{custIndustry}
+            </if>
+            <if test="custLevel != null and custLevel !=''">
+                AND cust_Level = #{custLevel}
+            </if>
+        </where>
+    </select>
+    <select id="queryCustomerById" parameterType="Long" resultType="Customer">
+        SELECT *
+        FROM customer
+        WHERE cust_id = #{id}
+    </select>
+
+    <update id="updateCustomer" parameterType="Customer">
+        UPDATE customer
+        <set>
+            <if test="cust_name != null">
+                cust_name = #{cust_name},
+            </if>
+            <if test="cust_source != null">
+                cust_source = #{cust_source},
+            </if>
+            <if test="cust_industry != null">
+                cust_industry = #{cust_industry},
+            </if>
+            <if test="cust_level != null">
+                cust_level = #{cust_level},
+            </if>
+            <if test="cust_linkman != null">
+                cust_linkman = #{cust_linkman},
+            </if>
+            <if test="cust_phone != null">
+                cust_phone = #{cust_phone},
+            </if>
+            <if test="cust_mobile != null">
+                cust_mobile = #{cust_mobile},
+            </if>
+            <if test="cust_zipcode != null">
+                cust_zipcode = #{cust_zipcode},
+            </if>
+            <if test="cust_address != null">
+                cust_address = #{cust_address}
+            </if>
+        </set>
+        <where>
+            cust_id = #{cust_id}
+        </where>
+    </update>
+
+    <delete id="deleteCustomerById" parameterType="Long">
+        DELETE FROM customer
+        WHERE cust_id = #{id}
+    </delete>
+</mapper>
+

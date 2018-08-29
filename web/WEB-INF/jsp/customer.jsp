@@ -2,7 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="itcast" uri="http://itcast.cn/common/" %>
+<%@ taglib prefix="itheima" uri="http://itcast.cn/common/" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -211,7 +211,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <form class="form-inline" action="${pageContext.request.contextPath }/customer/list.action"
-                      method="get">
+                      method="post">
                     <div class="form-group">
                         <label for="customerName">客户名称</label>
                         <input type="text" class="form-control" id="customerName" value="${custName }" name="custName">
@@ -288,7 +288,7 @@
                         </tbody>
                     </table>
                     <div class="col-md-12 text-right">
-                        <itcast:page url="${pageContext.request.contextPath }/customer/list.action"/>
+                        <itheima:page url="${pageContext.request.contextPath }/customer/list.action"/>
                     </div>
                     <!-- /.panel-body -->
                 </div>
